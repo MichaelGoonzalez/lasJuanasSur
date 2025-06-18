@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  return (
+  return ( 
     <div className="relative min-h-screen bg-gradient-to-br from-black via-fuchsia-900 to-purple-900 overflow-hidden">
       {/* Header principal: Título y menú */}
       <header className="flex flex-col items-center w-full pt-10 pb-6 z-20 relative">
