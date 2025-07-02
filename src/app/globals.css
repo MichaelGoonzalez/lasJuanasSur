@@ -43,3 +43,11 @@ body {
   color: var(--foreground);
   font-family: 'Pompiere', sans-serif;
 }
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(12px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 1.4s infinite;
+}
