@@ -686,7 +686,7 @@ function ProyectosSection() {
     {
       titulo: 'Rumbeando sin violencias',
       desc: 'Las VBG en contexto de rumba, son consideradas microviolencias que se desenvuelven en lugares de ocio y consumo. Las Juanas creó una propuesta de incidencia pública, autoprotección, identificación y prevención de las VBG en contextos de rumba para la construcción de espacios seguros.',
-      img: '/proyectos/PROYECTO RUMBIANDO SIN VIOLENCIAS.jpg',
+      img: '/proyectos/rsv.png',
       logoImg: '/proyectos/LOGO RUMBIANDO.png',
       descripcionCompleta: 'Las VBG en contexto de rumba, son consideradas microviolencias que se desenvuelven en lugares de ocio y consumo. Las Juanas creó una propuesta de incidencia pública, autoprotección, identificación y prevención de las VBG en contextos de rumba para la construcción de espacios seguros.',
       assets: {
