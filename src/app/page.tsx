@@ -1,7 +1,8 @@
 'use client'
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
+import { cursorTo } from "readline";
 
 // Type assertion to fix className issue with Framer Motion v11 and React 19
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -97,7 +98,8 @@ export default function Home() {
             {/* Logo, solo en modo compacto */}
             {!isMenuExpanded && (
               <div 
-                className="text-pink-400 font-espa font-bold text-lg"
+                onClick={() => setSection('inicio')}
+                className="text-pink-400 font-espa font-bold text-lg cursor-pointer"
                 style={{ letterSpacing: '0.15em' }}
               >
                 LAS JUANAS
@@ -131,8 +133,9 @@ export default function Home() {
             {/* En modo compacto, mostrar LAS JUANAS a la izquierda */}
             {!isMenuExpanded && (
               <MotionDiv 
+                onClick={() => setSection('inicio')}
                 className="text-pink-400 font-espa font-bold text-xl md:text-3xl lg:text-5xl"
-                style={{ letterSpacing: '0.15em' }}
+                style={{ letterSpacing: '0.15em' , cursor: 'pointer'}}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
@@ -244,13 +247,12 @@ export default function Home() {
               </div>
               {/* Texto principal a la derecha */}
               <div className="w-full lg:w-[55%] xl:w-[50%] flex flex-col items-center text-center justify-center h-[60%] sm:h-[55%] md:h-[50%] lg:h-full px-2 sm:px-4">
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-8xl font-extrabold text-white drop-shadow-lg leading-none mb-1 sm:mb-2">
-                  Las Juanas <br />
-                  <span className="text-pink-400">colectiva feminista</span>
-                </h1>
-                <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl 2xl:text-4xl
-                 text-white/80 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mb-2 sm:mb-4 leading-relaxed">
-                  Investigamos, visibilizamos y hacemos incidencia política frente a violencias basadas en género.
+                
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm md:text-base lg:text-5xl 
+                 text-white/80 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mb-2 sm:mb-4 leading-tight">
+                 Investigamos, mapeamos y visibilizamos 
+las violencias basadas en género en el departamento 
+del Huila, a partir de la incidencia política.
                 </p>
                 {/* Ícono animado */}
                 <div className="mt-1 sm:mt-2 md:mt-4 flex items-center justify-center">
@@ -338,7 +340,7 @@ function NosotrasSlider() {
     const interval = setInterval(() => {
       setPrevIndex(index);
       setIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [index, images.length]);
 
@@ -364,7 +366,7 @@ function NosotrasSlider() {
           initial={{ x: '100%', opacity: 1 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 1.0, ease: 'easeInOut' }}
         >
           <Image src={images[index]} alt={`Nosotras ${index+1}`} fill style={{objectFit:'cover'}} className="rounded-xl sm:rounded-2xl" />
         </MotionDiv>
@@ -392,25 +394,14 @@ function NosotrasContent() {
               <div className="absolute inset-0 flex flex-col justify-center items-center w-full h-full px-2 sm:px-4 py-4 sm:py-6 z-10">
             {/* Efecto de sombra de texto más intenso */}
             <div className="max-w-4xl mx-auto">
-              <p className="font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl mb-2 sm:mb-4 text-white text-center leading-relaxed" 
+              <p className="font-bold text-xs sm:text-sm md:text-base lg:text-2xl  mb-2 sm:mb-4 text-white text-center tracking-widest leading-relaxed" 
                  style={{
                    textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.6), 0 0 12px rgba(0,0,0,0.4)'
                  }}>
                 <span className="text-pink-400" style={{
-                  textShadow: '2px 2px 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7)'
-                }}>Somos Las Juanas,</span>  una colectiva feminista de Neiva que nace desde la rabia, la memoria y el amor por nuestras hermanas. Nos organizamos para resistir, cuestionar y transformar las violencias estructurales que atraviesan nuestros cuerpos y territorios. Creemos en la palabra como herramienta política, en la sororidad como tejido de cuidado, y en la acción como camino hacia la justicia. Visibilizamos lo que históricamente ha sido silenciado: las voces, historias y luchas de las mujeres y disidencias. A través de la investigación, la pedagogía popular, el arte y la movilización social, buscamos construir una ciudad más justa, segura y equitativa para todas. Porque nuestras vidas importan, porque no estamos solas, porque el feminismo también florece en el sur.
+                  textShadow: '1px 1px 2px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.7)'
+                }}>Somos Las Juanas,</span>  una colectiva feminista de Neiva, que nace desde la digna rabia, la memoria y la transformAcción. Nos organizamos para resistir, cuestionar y transformar las violencias estructurales que atraviesan nuestros cuerpos y territorios. Nos moviliza la investigación, la pedagogía popular, el arte y la incidencia politicosocial, nuestra lucha siempre será una ciudad mas segura para todas, porque la vida y el feminismo también florecen en el sur.
                 </p>
-                <a
-                  href="https://instagram.com/lasjuanasur"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                className="inline-block mt-1 sm:mt-2 text-pink-200 hover:text-pink-400 underline transition text-center text-xs sm:text-sm"
-                style={{
-                  textShadow: '1px 1px 3px rgba(0,0,0,0.8)'
-                }}
-                >
-                  @LASJUANASUR
-                </a>
             </div>
               </div>
             </div>
@@ -518,8 +509,19 @@ function PrincipiosSection() {
   ];
 
   return (
-    <div className="w-full rounded-xl p-6 sm:p-8 ">
-      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-pink-400 mb-6 sm:mb-8 text-center uppercase tracking-wide">Nuestros principios</h3>
+    <div className="w-full rounded-xl ">
+      <div className="flex justify-center ">
+            <a
+              href="https://www.instagram.com/lasjuanasur/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-pink-500 hover:bg-pink-600 text-white font-extrabold px-6 py-3 rounded-lg uppercase tracking-wider shadow-lg transition-transform transform hover:scale-105"
+            >
+              @LASJUANASSUR
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="opacity-90"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </a>
+          </div>
+      <h3 className="text-lg mt-5 sm:text-xl md:text-2xl lg:text-5xl font-extrabold text-pink-400 mb-6 sm:mb-8 text-center uppercase tracking-wide">Nuestros principios</h3>
       
       {/* Lista de principios como rectángulos horizontales */}
       <div className="space-y-3 sm:space-y-4">
@@ -532,7 +534,7 @@ function PrincipiosSection() {
                 selectedPrincipio === principio.id ? 'ring-2 ring-yellow-400' : ''
               }`}
             >
-              <h4 className="text-white font-bold text-sm sm:text-base md:text-lg text-left">{principio.titulo}</h4>
+              <h4 className="text-white font-bold text-sm sm:text-base md:text-3xl text-left">{principio.titulo}</h4>
               <div className="text-white text-xl sm:text-2xl">
                 {selectedPrincipio === principio.id ? '−' : '+'}
               </div>
@@ -552,8 +554,8 @@ function PrincipiosSection() {
                     <div className="space-y-4">
                       {principio.subtemas.map((subtema, index) => (
                         <div key={index} className="border-l-4 border-pink-400 pl-4">
-                          <h5 className="font-bold text-pink-300 text-sm sm:text-base mb-2">{subtema.titulo}</h5>
-                          <p className="text-white text-xs sm:text-sm leading-relaxed">{subtema.descripcion}</p>
+                          <h5 className="font-bold text-pink-300 text-sm sm:text-base md:text-3xl mb-2">{subtema.titulo}</h5>
+                          <p className="text-white text-xs sm:text-base md:text-2xl leading-relaxed">{subtema.descripcion}</p>
                         </div>
                       ))}
                     </div>
@@ -587,7 +589,7 @@ function NuestroEquipo() {
       id: 3,
       nombre: 'Andrea Gaspar',
       imagen: '/nosotras/equipo/5.jpg',
-      descripcion: 'Politóloga y feminista Surcolombiana. Quien le apuesta a la construcción de una vida digna para las mujeres.'
+      descripcion: 'Feminista y politóloga del sur de Colombia. Cree en la dignidad como derecho y en el territorio como lugar de transformación.'
     },
     {
       id: 4,
@@ -605,8 +607,8 @@ function NuestroEquipo() {
 
   return (
     <div className="relative flex flex-col items-center justify-center ">
-      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold text-pink-400 mb-1 sm:mb-2 text-center uppercase tracking-wide">Nuestro equipo</h3>
-        <p className="text-white text-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed px-2 sm:px-4">
+      <h3 className="text-lg sm:text-xl md:text-2xl lg:text-5xl font-extrabold text-pink-400 mb-1 sm:mb-2 text-center uppercase tracking-wide">Nuestro equipo</h3>
+        <p className="text-white text-center max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-5xl mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-base lg:text-3xl leading-relaxed ">
           &ldquo;Somos hijas enraizadas del sur. Con una apuesta que configura redes e investigación. Nuestra labor parte del feminismo crítico y comunitario, orientado a la acción colectiva y a la transformación de estructuras que limitan la vida en libertad y dignidad.&rdquo;
         </p>
       <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full max-w-6xl">
@@ -663,44 +665,75 @@ function NuestroEquipo() {
 function ProyectosSection() {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [activeImage, setActiveImage] = useState<number>(0);
+  
+  // State and ref for the scroll arrow
+  const [showScrollIcon, setShowScrollIcon] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setActiveImage(0);
   }, [selectedProject]);
-  
-  // Devuelve las imágenes del proyecto incluyendo el logo como imagen descargable/visible
-  const getProjectImages = (idx: number) => {
-    const base = proyectos[idx]?.assets?.images || [];
-    const extra = proyectos[idx]?.logoImg ? [proyectos[idx].logoImg as string] : [];
-    return [...base, ...extra];
+
+  // Check for scroll possibility on mount and resize
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    const checkScrollable = () => {
+      if (container) {
+        const isScrollable = container.scrollHeight > container.clientHeight;
+        // Also check if we are not already at the bottom
+        const isNotAtBottom = container.scrollHeight - container.scrollTop - container.clientHeight > 1;
+        setShowScrollIcon(isScrollable && isNotAtBottom);
+      }
+    };
+
+    checkScrollable(); // Check on mount
+
+    // Use a timeout to re-check after content has likely loaded and resized the container
+    const timer = setTimeout(checkScrollable, 500);
+
+    window.addEventListener('resize', checkScrollable);
+    return () => {
+      window.removeEventListener('resize', checkScrollable);
+      clearTimeout(timer);
+    }
+  }, []);
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      // Hide icon when near the bottom (e.g., last 20px)
+      if (scrollHeight - scrollTop - clientHeight < 20) {
+        setShowScrollIcon(false);
+      } else {
+        setShowScrollIcon(true);
+      }
+    }
   };
-  const getProjectVideos = (idx: number) => {
-    return proyectos[idx]?.assets?.videos || [];
-  }
-  const getProjectMedia = (idx: number) => {
-    const imgs = getProjectImages(idx).map(src => ({ type: 'image' as const, src }));
-    const vids = getProjectVideos(idx).map(src => ({ type: 'video' as const, src }));
-    return [...imgs, ...vids];
-  }
   
   const proyectos = [
-    {
-      titulo: 'Rumbeando sin violencias',
+    { titulo: 'Rumbeando sin violencias',
       desc: 'Las VBG en contexto de rumba, son consideradas microviolencias que se desenvuelven en lugares de ocio y consumo. Las Juanas creó una propuesta de incidencia pública, autoprotección, identificación y prevención de las VBG en contextos de rumba para la construcción de espacios seguros.',
       img: '/proyectos/rsv.png',
       logoImg: '/proyectos/LOGO RUMBIANDO.png',
       descripcionCompleta: 'Las VBG en contexto de rumba, son consideradas microviolencias que se desenvuelven en lugares de ocio y consumo. Las Juanas creó una propuesta de incidencia pública, autoprotección, identificación y prevención de las VBG en contextos de rumba para la construcción de espacios seguros.',
       assets: {
         images: [
-          '/proyectos/gráficas y elementos de RSV/0e6352cd-11d4-499a-88a9-4f0267a148b6.jpg',
-          '/proyectos/gráficas y elementos de RSV/6eb95637-f974-476e-b4c8-37181212b8c2.jpg',
-          '/proyectos/gráficas y elementos de RSV/90a7589b-a1c8-4bfb-96d9-11dbf6383285.jpg',
           '/proyectos/gráficas y elementos de RSV/formato 2.jpg',
-          '/proyectos/gráficas y elementos de RSV/Poster_RSV.png'
+          '/proyectos/gráficas y elementos de RSV/6eb95637-f974-476e-b4c8-37181212b8c2.jpg',
+          '/proyectos/gráficas y elementos de RSV/0e6352cd-11d4-499a-88a9-4f0267a148b6.jpg',
+           '/proyectos/gráficas y elementos de RSV/3.jpg',
+           '/proyectos/gráficas y elementos de RSV/4.jpg',
+           '/proyectos/gráficas y elementos de RSV/5.jpg',
+           '/proyectos/gráficas y elementos de RSV/Poster_RSV.png',
+          '/proyectos/gráficas y elementos de RSV/90a7589b-a1c8-4bfb-96d9-11dbf6383285.jpg',
+          
         ],
         pdfs: [
           '/proyectos/gráficas y elementos de RSV/Ellas perrean, tu ofreces rumba segura (1).pdf',
           '/proyectos/gráficas y elementos de RSV/GUÍA DE PREVENCIÓN Y ACTUACIÓN DE VBG EN AMBIENTES DE RUMBA - RSV.pdf',
-          '/proyectos/gráficas y elementos de RSV/Sin perreo no hay revolución (1).pdf'
+          '/proyectos/gráficas y elementos de RSV/Sin perreo no hay revolución (1).pdf',
+          '/proyectos/gráficas y elementos de RSV/Ruta institucional.pdf'
         ]
       },
       redesSociales: {
@@ -714,32 +747,18 @@ function ProyectosSection() {
         { label: 'Comunidades impactadas', valor: '8' }
       ]
     },
-    {
-      titulo: "Pa' la calle sin acoso",
-      desc: 'Pa’ la Calle sin Acoso es una investigación realizada por Las Juanas Colectiva Feminista en 2024 en Neiva, que busca diagnosticar el acoso callejero hacia mujeres y disidencias sexuales en espacios públicos y semipúblicos.',
-      img: '/proyectos/PROYECTO PA_ LA CALLE SIN ACOSO.jpg',
-      logoImg: '/proyectos/LOGO PA LA CALLE.png',
-      descripcionCompleta: 'Pa’ la Calle sin Acoso es una investigación realizada por Las Juanas Colectiva Feminista en 2024 en Neiva, que busca diagnosticar el acoso callejero hacia mujeres y disidencias sexuales en espacios públicos y semipúblicos.',
-      assets: { images: [], pdfs: [], videos: [] },
-      redesSociales: {
-        instagram: 'https://instagram.com/lasjuanasur',
-        facebook: 'https://facebook.com/lasjuanasur',
-        twitter: 'https://twitter.com/lasjuanasur'
-      },
-      estadisticas: [
-        { label: 'Casos documentados', valor: '200+' },
-        { label: 'Zonas mapeadas', valor: '12' },
-        { label: 'Denuncias procesadas', valor: '45' }
-      ]
-    },
-    {
-      titulo: 'Escuela femipolítica',
+    { titulo: 'Escuela femipolítica',
       desc: 'La escuela es una apuesta de formación con enfoque de género de la Colectiva Las Juanas. Pensada para brindar herramientas a mujeres y diversidad sexual en su participación en escenarios políticos y decisorios de la ciudad de Neiva.',
       img: '/proyectos/PROYECTO ESCUELA FEMIPOLÍTICA.jpg',
       logoImg: '/proyectos/LOGO ESCUELA FEMIPOLÍTICA.png',
       descripcionCompleta: 'La escuela es una apuesta de formación con enfoque de género de la Colectiva Las Juanas. Pensada para brindar herramientas a mujeres y diversidad sexual en su participación en escenarios políticos y decisorios de la ciudad de Neiva.',
       assets: {
-        images: [],
+        images: [
+           '/proyectos/gráficas y elementos de EFP/4.png',
+           '/proyectos/gráficas y elementos de EFP/1.png',
+            '/proyectos/gráficas y elementos de EFP/3.png',
+             '/proyectos/gráficas y elementos de EFP/5.png',
+        ],
         videos: [
           '/proyectos/gráficas y elementos de EFP/1.Escenarios de participación política.mp4',
           '/proyectos/gráficas y elementos de EFP/2. Audiovisual y fotografía móvil.mp4',
@@ -747,10 +766,12 @@ function ProyectosSection() {
           '/proyectos/gráficas y elementos de EFP/4. Escritura.mp4',
           '/proyectos/gráficas y elementos de EFP/5. Oralidad.mp4',
           '/proyectos/gráficas y elementos de EFP/6. Gestión de proyectos.mp4',
-          '/proyectos/gráficas y elementos de EFP/Final EFP.mp4'
+          'https://www.youtube.com/embed/2v0k1Whqx0s?si=MoT1WLCmeuhJbz3W',
+          'https://www.youtube.com/embed/ULM8UqejK_0?si=3P1yAZpd-zT32lEL',
+          'https://www.youtube.com/embed/jr96x6k59O8?si=qFcCsV8WvLp17JG3'
         ],
         pdfs: [
-          '/proyectos/gráficas y elementos de EFP/Desde-la-U-edicion-66 ARTICULO LAS JUANAS.pdf'
+          '/proyectos/gráficas y elementos de EFP/Nota Desde La U.pdf'
         ]
       },
       redesSociales: {
@@ -764,14 +785,140 @@ function ProyectosSection() {
         { label: 'Graduadas', valor: '65' }
       ]
     },
+    { titulo: "Pa' la calle sin acoso",
+      desc: 'Pa’ la calle sin acoso, es una iniciativa que busca visibilizar el acoso callejero como una violencia que se perpetua diariamente sobre los cuerpos de mujeres y diversidades en espacios públicos y semipúblicos de la ciudad de Neiva. ',
+      img: '/proyectos/PROYECTO PA_ LA CALLE SIN ACOSO.jpg',
+      logoImg: '/proyectos/LOGO PA LA CALLE.png',
+      descripcionCompleta: 'Pa’ la calle sin acoso, es una iniciativa que busca visibilizar el acoso callejero como una violencia que se perpetua diariamente sobre los cuerpos de mujeres y diversidades en espacios públicos y semipúblicos de la ciudad de Neiva. ',
+      assets: { images: [
+          '/proyectos/gráficas y elementos de PLCSA/1.png',
+          '/proyectos/gráficas y elementos de PLCSA/2.png',
+           '/proyectos/gráficas y elementos de PLCSA/3.png',
+             '/proyectos/gráficas y elementos de PLCSA/4.png',
+             '/proyectos/gráficas y elementos de PLCSA/5.png',
+             '/proyectos/gráficas y elementos de PLCSA/6.jpg',
+                '/proyectos/gráficas y elementos de PLCSA/7.jpg',
+                '/proyectos/gráficas y elementos de PLCSA/8.jpg',
+      ], pdfs: [
+         '/proyectos/gráficas y elementos de PLCSA/Acoso y tipos de acoso.pdf',
+         '/proyectos/gráficas y elementos de PLCSA/Experiencias.pdf',
+         '/proyectos/gráficas y elementos de PLCSA/Boletín Pa la calle sin acoso.pdf',
+      ], videos: [] },
+      redesSociales: {
+        instagram: 'https://instagram.com/lasjuanasur',
+        facebook: 'https://facebook.com/lasjuanasur',
+        twitter: 'https://twitter.com/lasjuanasur'
+      },
+      estadisticas: [
+        { label: 'Casos documentados', valor: '200+' },
+        { label: 'Zonas mapeadas', valor: '12' },
+        { label: 'Denuncias procesadas', valor: '45' }
+      ]
+    },
+
+    { titulo: "Neiva sin Acoso",
+      desc: 'Neiva sin acoso es una apuesta comunicativa que busca visibilizar la problemática del acoso callejero en la ciudad de Neiva, mediante propuestas gráficas y artísticas que sensibilicen a la ciudadanía. La iniciativa pretende ocupar el espacio público y generar disrupción en la cotidianidad de quienes transitan por él.',
+      img: '/proyectos/proyectoneivasinacoso.jpg',
+      logoImg: '/proyectos/logoneivasinacoso.png',
+      descripcionCompleta: 'Neiva sin acoso es una apuesta comunicativa que busca visibilizar la problemática del acoso callejero en la ciudad de Neiva, mediante propuestas gráficas y artísticas que sensibilicen a la ciudadanía. La iniciativa pretende ocupar el espacio público y generar disrupción en la cotidianidad de quienes transitan por él.',
+      assets: { images: [
+          '/proyectos/neivasinacoso/1.jpg',
+          '/proyectos/neivasinacoso/2.jpg',
+           '/proyectos/neivasinacoso/3.jpg',
+             '/proyectos/neivasinacoso/4.jpg',
+             '/proyectos/neivasinacoso/5.jpg',
+             '/proyectos/neivasinacoso/6.jpg',
+                '/proyectos/neivasinacoso/7.jpg',
+                '/proyectos/neivasinacoso/8.jpg',
+                '/proyectos/neivasinacoso/9.jpg',
+                '/proyectos/neivasinacoso/10.jpg',
+                '/proyectos/neivasinacoso/Ilustración.jpg',
+      ], pdfs: [
+         '/proyectos/neivasinacoso/Artículo investigativo .pdf',
+      ], videos: [
+        'https://www.youtube.com/embed/PVoDXRzJNmk?si=U0I59w-FhHqfJXrw',
+        'https://www.youtube.com/embed/U6z-nNjl6lE?si=1IxTGTFuRojU3lCp'
+      ] },
+      redesSociales: {
+        instagram: 'https://instagram.com/lasjuanasur',
+        facebook: 'https://facebook.com/lasjuanasur',
+        twitter: 'https://twitter.com/lasjuanasur'
+      },
+      estadisticas: [
+        { label: 'Casos documentados', valor: '200+' },
+        { label: 'Zonas mapeadas', valor: '12' },
+        { label: 'Denuncias procesadas', valor: '45' }
+      ]
+    },
+    { titulo: "Observatorio de acoso callejero",
+      desc: 'El Observatorio de Acoso Callejero Huila es una iniciativa de rastreo y mapeo del acoso en el departamento, que surge a partir de la experiencia de Pa’ la calle sin acoso. Este observatorio busca consolidarse como un proyecto continuo para sistematizar los casos de acoso callejero en los 37 municipios del Huila y, al mismo tiempo, convertirse en una plataforma de incidencia política.',
+      img: '/proyectos/proyectoobservatorio.jpg',
+      logoImg: '/proyectos/logoobservatorio.png',
+      descripcionCompleta: 'El Observatorio de Acoso Callejero Huila es una iniciativa de rastreo y mapeo del acoso en el departamento, que surge a partir de la experiencia de Pa’ la calle sin acoso. Este observatorio busca consolidarse como un proyecto continuo para sistematizar los casos de acoso callejero en los 37 municipios del Huila y, al mismo tiempo, convertirse en una plataforma de incidencia política.',
+      assets: { images: [
+          '/proyectos/observatorio/1.png',
+          '/proyectos/observatorio/2.jpg',
+             '/proyectos/observatorio/4.jpg',
+             '/proyectos/observatorio/5.jpg',
+             '/proyectos/observatorio/6.jpg',
+                '/proyectos/observatorio/7.jpg',
+                '/proyectos/observatorio/8.jpg',
+                '/proyectos/observatorio/8.jpg',
+                 '/proyectos/observatorio/Descargable Ilustración.jpeg',
+      ], pdfs: [
+         '/proyectos/observatorio/Tipología.pdf',
+      ], videos: [
+        '/proyectos/observatorio/3.mp4',
+      ] },
+      redesSociales: {
+        instagram: 'https://instagram.com/lasjuanasur',
+        facebook: 'https://facebook.com/lasjuanasur',
+        twitter: 'https://twitter.com/lasjuanasur'
+      },
+      estadisticas: [
+        { label: 'Casos documentados', valor: '200+' },
+        { label: 'Zonas mapeadas', valor: '12' },
+        { label: 'Denuncias procesadas', valor: '45' }
+      ]
+    },
+    
   ];
+
+  // Devuelve las imágenes del proyecto incluyendo el logo como imagen descargable/visible
+  const getProjectImages = (idx: number) => {
+    const base = proyectos[idx]?.assets?.images || [];
+    return [...base];
+  };
+
+  const getProjectMedia = (idx: number) => {
+    const imgs = getProjectImages(idx).map(src => ({ type: 'image' as const, src }));
+    
+    const vids = (proyectos[idx]?.assets?.videos || []).map(src => {
+        if (src.includes('youtube.com/embed')) {
+            const videoIdMatch = src.match(/embed\/([a-zA-Z0-9_-]+)/);
+            const videoId = videoIdMatch ? videoIdMatch[1] : null;
+            return { 
+                type: 'youtube' as const, 
+                src,
+                thumbnail: videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '/fondo.jpg' // fallback image
+            };
+        }
+        return { type: 'video' as const, src };
+    });
+
+    return [...imgs, ...vids];
+  }
   
   return (
-    <div className="w-screen h-full flex flex-col gap-0 justify-stretch items-stretch px-0">
+    <div 
+      ref={scrollContainerRef}
+      onScroll={handleScroll}
+      className="relative w-screen h-screen overflow-y-auto scrollbar-hide"
+    >
       {proyectos.map((p, i) => (
         <div 
           key={i} 
-          className="relative w-screen flex-1 basis-1/3 overflow-hidden cursor-pointer group"
+          className="relative w-screen h-80 flex-shrink-0 overflow-hidden cursor-pointer group"
           onClick={() => setSelectedProject(i)}
         >
           <Image src={p.img} alt={p.titulo} fill style={{ objectFit: 'cover' }} className="absolute inset-0 w-full h-full transform transition-transform duration-700 ease-out group-hover:scale-105" />
@@ -798,6 +945,15 @@ function ProyectosSection() {
           </div>
         </div>
       ))}
+
+      {/* Scroll Down Arrow */}
+      {showScrollIcon && (
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-20">
+          <svg className="w-10 h-10 text-pink-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+      )}
       
       {/* Popup Modal */}
       {selectedProject !== null && (
@@ -829,13 +985,32 @@ function ProyectosSection() {
                         <h3 className="text-white/90 font-bold">Galería</h3>
                         <div className="relative w-full h-[56vh] sm:h-[58vh] md:h-[60vh] lg:h-[62vh] bg-black rounded-lg overflow-hidden ring-1 ring-white/10">
                           <MotionDiv key={activeImage} initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.3}} className="absolute inset-0 flex items-center justify-center">
-                            {getProjectMedia(selectedProject)[activeImage].type === 'image' ? (
-                              <Image src={getProjectMedia(selectedProject)[activeImage].src} alt={`Media ${activeImage+1}`} fill style={{objectFit:'contain'}} />
-                            ) : (
-                              <video controls className="w-full h-full" style={{objectFit:'contain'}}>
-                                <source src={getProjectMedia(selectedProject)[activeImage].src} type="video/mp4" />
-                              </video>
-                            )}
+                            {(() => {
+                              const media = getProjectMedia(selectedProject)[activeImage];
+                              switch (media.type) {
+                                case 'image':
+                                  return <Image src={media.src} alt={`Media ${activeImage + 1}`} fill style={{ objectFit: 'contain' }} />;
+                                case 'video':
+                                  return (
+                                    <video controls className="w-full h-full" style={{ objectFit: 'contain' }}>
+                                      <source src={media.src} type="video/mp4" />
+                                    </video>
+                                  );
+                                case 'youtube':
+                                  return (
+                                    <iframe
+                                      className="w-full h-full"
+                                      src={media.src}
+                                      title="YouTube video player"
+                                      frameBorder="0"
+                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                      allowFullScreen
+                                    ></iframe>
+                                  );
+                                default:
+                                  return null;
+                              }
+                            })()}
                           </MotionDiv>
                           <button onClick={() => setActiveImage((prev)=> (prev-1+getProjectMedia(selectedProject).length)%getProjectMedia(selectedProject).length)} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full w-9 h-9 flex items-center justify-center">‹</button>
                           <button onClick={() => setActiveImage((prev)=> (prev+1)%getProjectMedia(selectedProject).length)} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full w-9 h-9 flex items-center justify-center">›</button>
@@ -850,14 +1025,18 @@ function ProyectosSection() {
                         <div className="flex gap-2 overflow-x-auto pb-1">
                           {getProjectMedia(selectedProject).map((m, idx) => (
                             <button key={idx} onClick={()=>setActiveImage(idx)} className={`relative flex-none w-24 h-16 rounded-md overflow-hidden ring-2 ${activeImage===idx? 'ring-pink-400' : 'ring-white/10'}`}>
-                              {m.type === 'image' ? (
+                              {m.type === 'image' && (
                                 <Image src={m.src} alt={`Miniatura ${idx+1}`} fill style={{objectFit:'cover'}} />
-                              ) : (
+                              )}
+                              {m.type === 'video' && (
                                 <video muted playsInline className="w-full h-full" style={{objectFit:'cover'}}>
                                   <source src={m.src} type="video/mp4" />
                                 </video>
                               )}
-                              {m.type === 'video' && (
+                              {m.type === 'youtube' && (
+                                <Image src={m.thumbnail} alt={`Miniatura ${idx+1}`} fill style={{objectFit:'cover'}} />
+                              )}
+                              {(m.type === 'video' || m.type === 'youtube') && (
                                 <span className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1 rounded">Video</span>
                               )}
                             </button>
@@ -909,25 +1088,22 @@ function DenunciaSection() {
       <div className="w-full max-w-4xl mx-auto px-4">
         <div className="flex flex-col gap-4 sm:gap-6 items-center text-center">
           {/* Cabezote */}
-          <div className="relative w-full max-w-2xl h-28 sm:h-32 md:h-36 lg:h-40 rounded-xl overflow-hidden ring-1 ring-white/10 bg-black">
+          <div className="relative w-full max-w-4xl h-28 sm:h-32 md:h-36 lg:h-60 rounded-xl overflow-hidden ring-1 ring-white/10 bg-black">
             <Image src="/denuncia/CABEZOTE DENUNCIA.png" alt="Denuncia el acoso callejero" fill style={{objectFit:'contain'}} />
           </div>
           
           {/* Descripción */}
-          <div className="bg-black/40 rounded-xl p-4 sm:p-6 ring-1 ring-white/10">
-            <p className="text-white text-sm sm:text-base leading-relaxed">
+          <div className=" ring-white/10">
+            <p className="text-white text-sm sm:text-xl leading-relaxed">
               Este formulario hace parte del Observatorio de Acoso Callejero Huila, un proyecto de investigación e incidencia política que busca rastrear las experiencias de acoso callejero que viven las mujeres a diario en el departamento. Al responder, nos ayudas a reunir datos de gran importancia que servirán para seguir exigir acciones de justicia y seguridad, construir entornos más seguros y defender nuestro derecho a transitar por el espacio público libres de violencias y sin miedo.
-              <br/><br/>
+              <br/>
               Debes completar el formulario por cada hecho de acoso que desees denunciar. Denuncia las veces que desees.
-              <br/><br/>
-              <span className="text-pink-300 font-bold">¡Recuerda!</span> Tu testimonio es anónimo 💜
+              <br/>
+              <span className="text-pink-300 font-bold">¡Recuerda!</span>  Tus datos están protegidos 💜
               <br/>
               <span className="text-pink-300 font-bold">Cuéntanos, para que nadie más tenga que callar 🗣️</span>
             </p>
-          </div>
-
-          {/* CTA */}
-          <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4">
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLScy2So9nnWxB0xj0J9HruU6uTqY4SFJFDYeqvlI56SEtrUr4g/viewform"
               target="_blank"
@@ -938,6 +1114,8 @@ function DenunciaSection() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="opacity-90"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </a>
           </div>
+          </div>
+
         </div>
       </div>
     </section>
