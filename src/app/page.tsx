@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
-import { cursorTo } from "readline";
 
 // Type assertion to fix className issue with Framer Motion v11 and React 19
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
