@@ -25,12 +25,21 @@ export default function Home() {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Imagen de fondo */}
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url(/fondo2.png)",
-        }}
-      />
+      {/* Fondo para móviles */}
+<div
+  className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat sm:hidden"
+  style={{
+    backgroundImage: "url(/fondomovil.png)",
+  }}
+/>
+
+{/* Fondo para pantallas grandes */}
+<div
+  className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat hidden sm:block"
+  style={{
+    backgroundImage: "url(/fondo2.png)",
+  }}
+/>
 
       {/* Overlay oscuro para profesionalismo */}
       <div className="absolute inset-0 bg-black/40" />
