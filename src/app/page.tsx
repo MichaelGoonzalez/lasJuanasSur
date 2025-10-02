@@ -1704,7 +1704,7 @@ function DenunciaSection() {
 
           {/* Descripción */}
           <div className=" ring-white/10">
-            <p className="text-white text-sm sm:text-xl leading-relaxed">
+            <p className="text-white text-xl sm:text-xl leading-relaxed">
               Este formulario hace parte del Observatorio de Acoso Callejero
               Huila, un proyecto de investigación e incidencia política que
               busca rastrear las experiencias de acoso callejero que viven las
