@@ -8,6 +8,13 @@
   font-display: swap;
 }
 
+/* Oculta visualmente el scrollbar pero mantiene su funcionalidad */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
 .font-espa {
   font-family: 'espa', cursive;
 }

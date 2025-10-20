@@ -75,8 +75,8 @@ export default function Home() {
         <MotionDiv
           className={`w-full z-20 relative transition-all duration-500 ease-in-out ${
             isMenuExpanded
-              ? "h-[10vh] sm:h-[22vh] md:h-[25vh]"
-              : "h-[10vh] sm:h-[10vh]"
+              ? "h-[20vh] sm:h-[22vh] md:h-[25vh]"
+              : "h-[20vh] sm:h-[10vh]"
           }`}
           animate={{
             height: isMenuExpanded ? "h-[10vh] sm:h-[22vh] md:h-[25vh]" : "h-[8vh] sm:h-[10vh]",
@@ -90,7 +90,7 @@ export default function Home() {
              text-[2.2rem] xs:text-[1.5rem] sm:text-[2rem] md:text-[3.5rem] 
              lg:text-[6rem] xl:text-[8rem] 2xl:text-[8rem] 
              text-pink-400 select-none drop-shadow-lg font-espa
-             leading-none whitespace-nowrap -mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8"
+             leading-none whitespace-nowrap -mt-2 sm:-mt-4 md:-mt-6 lg:mt-8"
               style={{ letterSpacing: "0.15em" }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -123,11 +123,13 @@ export default function Home() {
 
   {/* Menú debajo del logo, en horizontal */}
   <MotionDiv
-    initial={{ opacity: 0, y: -10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, ease: "easeInOut" }}
-    className="flex flex-row justify-center items-center w-full mt-3 gap-4 text-white font-bold text-sm"
-  >
+  initial={{ opacity: 0, y: -10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, ease: "easeInOut" }}
+  className="flex flex-wrap justify-center items-center w-full mt-3 gap-x-6 gap-y-2 text-white font-bold text-sm"
+>
+  {/* Primera fila */}
+  <div className="flex flex-row justify-center text-xl gap-4 w-full sm:w-auto">
     <a
       href="#inicio"
       onClick={() => setSection("inicio")}
@@ -149,12 +151,16 @@ export default function Home() {
     <a
       href="#proyectos"
       onClick={() => setSection("proyectos")}
-      className={`px-2 sm:px-3 hover:text-pink-400 transition border-r-2 border-pink-400 last:border-r-0 ${
+      className={`px-2 sm:px-3 hover:text-pink-400 transition last:border-r-0 ${
         section === "proyectos" ? "text-pink-400" : ""
       }`}
     >
       PROYECTOS
     </a>
+  </div>
+
+  {/* Segunda fila */}
+  <div className="flex flex-row justify-center text-xl gap-4 w-full">
     <a
       href="#mapa"
       onClick={() => setSection("mapa")}
@@ -173,7 +179,9 @@ export default function Home() {
     >
       DENUNCIA
     </a>
-  </MotionDiv>
+  </div>
+</MotionDiv>
+
 </div>
 
 
@@ -380,12 +388,14 @@ export default function Home() {
 
         {/* Contenido principal animado */}
         <main
-          className={`relative flex items-center justify-center px-2 sm:px-4 md:px-8 pt-2 
-            sm:pt-4 md:pt-8 pb-0 w-full mx-auto overflow-hidden transition-all duration-500
+          className={`relative flex items-center
+             justify-center px-2 sm:px-4 md:px-8 pt-2 
+            sm:pt-4 md:pt-8 pb-0 w-full mx-auto 
+            overflow-y-auto overflow-x-hidden transition-all duration-500
              ease-in-out ${
             isMenuExpanded
-              ? "h-[90vh] sm:h-[78vh] md:h-[80vh]"
-              : "h-[90vh] sm:h-[90vh] md:h-[95vh]"
+              ? "h-[80vh] sm:h-[78vh] md:h-[80vh]"
+              : "h-[80vh] sm:h-[90vh] md:h-[95vh]"
           }`}
         >
           <AnimatePresence mode="wait">
@@ -449,7 +459,8 @@ export default function Home() {
                 {/* Versión Móvil */}
                 <MotionDiv
                   key="inicio-mobile"
-                  className="flex sm:hidden w-full h-full top-0 left-0 flex-col   gap-4"
+                  className="flex sm:hidden w-full h-full top-0 
+                  left-0 flex-col overflow-y-auto"
                   initial={{ y: "100%", opacity: 0 }}
                   animate={{
                     y: 0,
@@ -463,7 +474,7 @@ export default function Home() {
                   }}
                 >
                   {/* Texto primero */}
-                  <div className="w-full flex flex-col items-center text-center justify-center px-4">
+                  <div className="w-full flex-shrink-0 flex flex-col items-center text-center justify-center px-4">
                     <p className="mt-2 text-4xl sm:text-3xl text-white/80 max-w-sm mx-auto mb-4 leading-snug">
                       Investigamos, mapeamos y visibilizamos las violencias
                       basadas en género en el departamento del Huila, a partir
@@ -485,7 +496,7 @@ export default function Home() {
                   </div>
 
                   {/* Imagen después */}
-                  <div className="w-full h-100 flex items-end overflow-hidden mt-4">
+                  <div className="w-full flex-shrink-0 h-[60vh] relative mt-4">
                     <div className="relative w-full h-full">
                       <Image
                         src="/mujerjuans.png"
@@ -499,11 +510,12 @@ export default function Home() {
                 </MotionDiv>
               </>
             )}
-
             {section === "nosotras" && (
               <MotionDiv
                 key="nosotras"
-                className="w-full h-full top-0 left-0 flex flex-col lg:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 relative px-2 sm:px-4"
+                className="w-full h-full top-0 left-0 flex flex-col 
+                lg:flex-row items-center justify-center gap-4 sm:gap-6
+                 md:gap-8 mb-4 sm:mb-6 relative px-2 sm:px-4"
                 initial={{ y: "100%", opacity: 0 }}
                 animate={{
                   y: 0,
@@ -566,7 +578,8 @@ export default function Home() {
             {section === "denuncia" && (
               <MotionDiv
                 key="denuncia"
-                className="w-full h-full flex items-center justify-center px-2 sm:px-4"
+                className="w-full h-full flex flex-col items-center
+                justify-start px-2 sm:px-4 overflow-y-auto"
                 initial={{ y: "100%", opacity: 0 }}
                 animate={{
                   y: 0,
@@ -1375,7 +1388,8 @@ function ProyectosSection() {
             fill
             style={{ objectFit: "cover" }}
             className="absolute inset-0 w-full h-full transform
-             transition-transform duration-700 ease-out group-hover:scale-105"
+             transition-transform duration-700 
+             ease-out group-hover:scale-105"
           />
           {/* Overlay: oscurece y crea gradiente de izquierda a derecha */}
           <div className="absolute inset-0 bg-black/50 transition-opacity duration-500 ease-out group-hover:opacity-60" />
@@ -1384,7 +1398,9 @@ function ProyectosSection() {
           {/* Contenido */}
           <div className="relative z-10 w-full h-full flex flex-col sm:flex-row items-center sm:items-stretch text-center sm:text-left">
   {/* Texto arriba (en móvil) o izquierda (en web) */}
-  <div className="flex-1 flex flex-col justify-center px-3 sm:px-6 transform transition-transform duration-500 ease-out group-hover:translate-x-1">
+  <div className="flex-1 flex flex-col justify-center 
+  px-3 sm:px-6 transform transition-transform duration-500 
+  ease-out group-hover:translate-x-1 mt-4">
     <h4 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white drop-shadow mb-1 sm:mb-2">
       {p.titulo}
     </h4>
@@ -1398,7 +1414,7 @@ function ProyectosSection() {
   {p.logoImg ? (
     <div className="flex justify-center  sm:mt-0 sm:justify-center 
     sm:items-center w-full sm:w-1/3 md:w-1/5 lg:w-1/5 pr-0 sm:pr-6">
-  <div className=" mb-4 relative w-80 h-30 
+  <div className=" mb-4 relative w-100 h-50 
   sm:w-44 sm:h-20 
   md:w-100 md:h-70
   transform transition-transform duration-500 ease-out group-hover:translate-y-[-2px] group-hover:scale-105">
@@ -1698,11 +1714,13 @@ function ProyectosSection() {
 
 function DenunciaSection() {
   return (
-    <section className="w-full py-12 sm:py-16 md:py-20 flex items-center justify-center">
+    <section className="w-full py-5 sm:py-16 md:py-20 flex items-center justify-center">
       <div className="w-full max-w-4xl mx-auto px-4">
         <div className="flex flex-col gap-4 sm:gap-6 items-center text-center">
           {/* Cabezote */}
-          <div className="relative w-full max-w-4xl h-28 sm:h-32 md:h-36 lg:h-60 rounded-xl overflow-hidden ring-1 ring-white/10 bg-black">
+          <div className="relative w-full max-w-4xl h-28
+           sm:h-32 md:h-36 lg:h-60 rounded-xl overflow-hidden 
+           ring-1 ring-white/10 bg-black">
             <Image
               src="/denuncia/CABEZOTE DENUNCIA.png"
               alt="Denuncia el acoso callejero"
